@@ -1,9 +1,6 @@
 
-from academics.models import (
-    TeachingAssignment,
-    AttendanceRecord,
-    Assignment,
-)
+
+
 document.addEventListener("DOMContentLoaded", function () {
 
     const filter = document.getElementById("assignmentFilter");
@@ -33,6 +30,8 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 });
+
+
 @login_required
 def teacher_assignments(request):
     if request.user.role != "TEACHER":
@@ -72,3 +71,4 @@ def teacher_assignments(request):
         "teacher/assignments.html",
         context
     )
+

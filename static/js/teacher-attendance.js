@@ -1,4 +1,7 @@
 
+
+
+
 document.addEventListener("DOMContentLoaded", function () {
     const dateFilter = document.getElementById("dateFilter");
     const sectionFilter = document.getElementById("sectionFilter");
@@ -36,12 +39,17 @@ document.addEventListener("DOMContentLoaded", function () {
                 selectedStatus === "all" ||
                 row.dataset.status === selectedStatus;
 
+
+            if (matchesDate && matchesSection &&
+                matchesSubject && matchesStatus) {
+
             if (
                 matchesDate &&
                 matchesSection &&
                 matchesSubject &&
                 matchesStatus
             ) {
+
                 row.style.display = "";
                 visibleCount++;
             } else {
@@ -58,5 +66,9 @@ document.addEventListener("DOMContentLoaded", function () {
     subjectFilter.addEventListener("change", filterAttendance);
     statusFilter.addEventListener("change", filterAttendance);
 
+});
+
+
     filterAttendance();
 });
+

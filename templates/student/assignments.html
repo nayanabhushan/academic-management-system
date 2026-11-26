@@ -36,6 +36,7 @@
         <div class="col-md-6 col-lg-3">
             <div class="summary-card">
                 <i class="bi bi-journal-bookmark"></i>
+                <h3>--</h3>
                 <h3>{{ total_assignments|stringformat:"02d" }}</h3>
                 <p>Total Assignments</p>
             </div>
@@ -44,6 +45,7 @@
         <div class="col-md-6 col-lg-3">
             <div class="summary-card">
                 <i class="bi bi-hourglass-split"></i>
+                <h3>--</h3>
                 <h3>{{ pending_count|stringformat:"02d" }}</h3>
                 <p>Pending</p>
             </div>
@@ -52,6 +54,7 @@
         <div class="col-md-6 col-lg-3">
             <div class="summary-card">
                 <i class="bi bi-check-circle"></i>
+                <h3>--</h3>
                 <h3>{{ submitted_count|stringformat:"02d" }}</h3>
                 <p>Submitted</p>
             </div>
@@ -60,6 +63,7 @@
         <div class="col-md-6 col-lg-3">
             <div class="summary-card">
                 <i class="bi bi-exclamation-circle"></i>
+                <h3>--</h3>
                 <h3>{{ overdue_count|stringformat:"02d" }}</h3>
                 <p>Overdue</p>
             </div>
@@ -87,6 +91,28 @@
 
         </div>
 
+        <!-- Assignment 1 -->
+        <div class="assignment-item" data-status="pending">
+
+            <div class="d-flex justify-content-between flex-wrap gap-3">
+
+                <div>
+                    <h5>Mathematics Assignment</h5>
+                    <p>Subject: Applied Mathematics</p>
+                    <p>Topic: Differential Calculus</p>
+                </div>
+
+                <div class="text-md-end">
+                    <span class="status pending">Pending</span>
+                    <p class="due-date mt-2">Due: --/--/----</p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Assignment 2 -->
+        <div class="assignment-item" data-status="submitted">
         {% for assignment in assignments %}
 
         <div class="assignment-item"
@@ -95,6 +121,54 @@
             <div class="d-flex justify-content-between flex-wrap gap-3">
 
                 <div>
+                    <h5>Physics Practical File</h5>
+                    <p>Subject: Applied Physics</p>
+                    <p>Topic: Laser Experiments</p>
+                </div>
+
+                <div class="text-md-end">
+                    <span class="status submitted">Submitted</span>
+                    <p class="due-date mt-2">Submitted: --/--/----</p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Assignment 3 -->
+        <div class="assignment-item" data-status="pending">
+
+            <div class="d-flex justify-content-between flex-wrap gap-3">
+
+                <div>
+                    <h5>Chemistry Assignment</h5>
+                    <p>Subject: Applied Chemistry</p>
+                    <p>Topic: Engineering Materials</p>
+                </div>
+
+                <div class="text-md-end">
+                    <span class="status pending">Pending</span>
+                    <p class="due-date mt-2">Due: --/--/----</p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Assignment 4 -->
+        <div class="assignment-item" data-status="overdue">
+
+            <div class="d-flex justify-content-between flex-wrap gap-3">
+
+                <div>
+                    <h5>Electrical Science Worksheet</h5>
+                    <p>Subject: Electrical Science</p>
+                    <p>Topic: Basic Electrical Circuits</p>
+                </div>
+
+                <div class="text-md-end">
+                    <span class="status overdue">Overdue</span>
+                    <p class="due-date mt-2">Due: --/--/----</p>
                     <h5>{{ assignment.title }}</h5>
 
                     <p>
@@ -160,6 +234,11 @@
             </div>
 
         </div>
+
+        <p class="note">
+            Note: These are sample assignments for the frontend.
+            Actual assignments and deadlines will be fetched from the backend.
+        </p>
 
         {% empty %}
 

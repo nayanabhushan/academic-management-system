@@ -20,6 +20,10 @@
             </p>
         </div>
 
+        <button class="btn btn-create" id="createAssignmentBtn">
+            <i class="bi bi-plus-circle me-2"></i>
+            Create Assignment
+        </button>
         <a href="{% url 'teacher_create_assignment' %}"
            class="btn btn-create"
            id="createAssignmentBtn">
@@ -34,6 +38,7 @@
         <div class="col-md-3 col-sm-6">
             <div class="summary-card">
                 <i class="bi bi-journal-text summary-icon"></i>
+                <div class="summary-number">04</div>
                 <div class="summary-number">{{ total_assignments|stringformat:"02d" }}</div>
                 <div class="summary-label">Total Assignments</div>
             </div>
@@ -42,6 +47,7 @@
         <div class="col-md-3 col-sm-6">
             <div class="summary-card">
                 <i class="bi bi-clock-history summary-icon"></i>
+                <div class="summary-number">02</div>
                 <div class="summary-number">{{ active_count|stringformat:"02d" }}</div>
                 <div class="summary-label">Active Assignments</div>
             </div>
@@ -50,6 +56,7 @@
         <div class="col-md-3 col-sm-6">
             <div class="summary-card">
                 <i class="bi bi-check-circle summary-icon"></i>
+                <div class="summary-number">01</div>
                 <div class="summary-number">{{ closed_count|stringformat:"02d" }}</div>
                 <div class="summary-label">Completed Assignments</div>
             </div>
@@ -58,6 +65,7 @@
         <div class="col-md-3 col-sm-6">
             <div class="summary-card">
                 <i class="bi bi-pencil-square summary-icon"></i>
+                <div class="summary-number">01</div>
                 <div class="summary-number">{{ draft_count|stringformat:"02d" }}</div>
                 <div class="summary-label">Draft Assignments</div>
             </div>
@@ -106,6 +114,70 @@
 
     <div class="row g-4" id="assignmentList">
 
+        <!-- Assignment 1 -->
+        <div class="col-lg-6 assignment-item"
+             data-status="active">
+
+            <div class="assignment-card">
+
+                <div class="d-flex justify-content-between align-items-start mb-3">
+
+                    <div class="assignment-icon">
+                        <i class="bi bi-calculator"></i>
+                    </div>
+
+                    <span class="status-badge status-active">
+                        Active
+                    </span>
+
+                </div>
+
+                <h5 class="assignment-title">Mathematics Assignment 01</h5>
+
+                <p class="assignment-detail mb-3">
+                    Applied Mathematics · AM101
+                </p>
+
+                <hr style="border-color:#EADDD5;">
+
+                <div class="row g-3">
+
+                    <div class="col-6">
+                        <div class="assignment-detail">
+                            <i class="bi bi-people me-1"></i> Assigned Section
+                        </div>
+                        <strong>B.Tech Section A</strong>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="assignment-detail">
+                            <i class="bi bi-calendar-event me-1"></i> Due Date
+                        </div>
+                        <strong>18 Nov 2026</strong>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="assignment-detail">
+                            <i class="bi bi-file-earmark-text me-1"></i> Total Marks
+                        </div>
+                        <strong>20 Marks</strong>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="assignment-detail">
+                            <i class="bi bi-upload me-1"></i> Submissions
+                        </div>
+                        <strong>-- / --</strong>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Assignment 2 -->
+        <div class="col-lg-6 assignment-item"
+             data-status="active">
         {% for assignment in assignments %}
 
         <div class="col-lg-6 assignment-item"
@@ -116,6 +188,12 @@
                 <div class="d-flex justify-content-between align-items-start mb-3">
 
                     <div class="assignment-icon">
+                        <i class="bi bi-lightning-charge"></i>
+                    </div>
+
+                    <span class="status-badge status-active">
+                        Active
+
                         <i class="bi bi-journal-text"></i>
                     </div>
 
@@ -125,6 +203,10 @@
 
                 </div>
 
+                <h5 class="assignment-title">Physics Practical File</h5>
+
+                <p class="assignment-detail mb-3">
+                    Applied Physics · AP102
                 <h5 class="assignment-title">{{ assignment.title }}</h5>
 
                 <p class="assignment-detail mb-3">
@@ -142,6 +224,7 @@
                         <div class="assignment-detail">
                             <i class="bi bi-people me-1"></i> Assigned Section
                         </div>
+                        <strong>B.Tech Section B</strong>
                         <strong>
                             {{ assignment.teaching_assignment.section.course }}
                             Section {{ assignment.teaching_assignment.section.section }}
@@ -152,6 +235,8 @@
                         <div class="assignment-detail">
                             <i class="bi bi-calendar-event me-1"></i> Due Date
                         </div>
+
+                        <strong>20 Nov 2026</strong>
                         <strong>
                             {% if assignment.due_date %}
                                 {{ assignment.due_date|date:"d M Y" }}
@@ -165,6 +250,7 @@
                         <div class="assignment-detail">
                             <i class="bi bi-file-earmark-text me-1"></i> Total Marks
                         </div>
+                        <strong>25 Marks</strong>
                         <strong>{{ assignment.total_marks }} Marks</strong>
                     </div>
 
@@ -172,6 +258,68 @@
                         <div class="assignment-detail">
                             <i class="bi bi-upload me-1"></i> Submissions
                         </div>
+                        <strong>-- / --</strong>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Assignment 3 -->
+        <div class="col-lg-6 assignment-item"
+             data-status="closed">
+
+            <div class="assignment-card">
+
+                <div class="d-flex justify-content-between align-items-start mb-3">
+
+                    <div class="assignment-icon">
+                        <i class="bi bi-flask"></i>
+                    </div>
+
+                    <span class="status-badge status-closed">
+                        Closed
+                    </span>
+
+                </div>
+
+                <h5 class="assignment-title">Chemistry Assignment</h5>
+
+                <p class="assignment-detail mb-3">
+                    Engineering Chemistry · EC103
+                </p>
+
+                <hr style="border-color:#EADDD5;">
+
+                <div class="row g-3">
+
+                    <div class="col-6">
+                        <div class="assignment-detail">
+                            <i class="bi bi-people me-1"></i> Assigned Section
+                        </div>
+                        <strong>B.Tech Section A</strong>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="assignment-detail">
+                            <i class="bi bi-calendar-event me-1"></i> Due Date
+                        </div>
+                        <strong>08 Nov 2026</strong>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="assignment-detail">
+                            <i class="bi bi-file-earmark-text me-1"></i> Total Marks
+                        </div>
+                        <strong>15 Marks</strong>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="assignment-detail">
+                            <i class="bi bi-upload me-1"></i> Submissions
+                        </div>
+                        <strong>-- / --</strong>
 
                         <strong>{{ assignment.submission_count }}</strong>
 
@@ -181,7 +329,67 @@
                                 <i class="bi bi-eye me-2"></i>
                                 View Submissions
                             </a>
+                        </div>                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Assignment 4 -->
+        <div class="col-lg-6 assignment-item"
+             data-status="draft">
+
+            <div class="assignment-card">
+
+                <div class="d-flex justify-content-between align-items-start mb-3">
+
+                    <div class="assignment-icon">
+                        <i class="bi bi-cpu"></i>
+                    </div>
+
+                    <span class="status-badge status-draft">
+                        Draft
+                    </span>
+
+                </div>
+
+                <h5 class="assignment-title">Electrical Science Worksheet</h5>
+
+                <p class="assignment-detail mb-3">
+                    Electrical Science · ES104
+                </p>
+
+                <hr style="border-color:#EADDD5;">
+
+                <div class="row g-3">
+
+                    <div class="col-6">
+                        <div class="assignment-detail">
+                            <i class="bi bi-people me-1"></i> Assigned Section
                         </div>
+                        <strong>B.Tech Section B</strong>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="assignment-detail">
+                            <i class="bi bi-calendar-event me-1"></i> Due Date
+                        </div>
+                        <strong>Not Published</strong>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="assignment-detail">
+                            <i class="bi bi-file-earmark-text me-1"></i> Total Marks
+                        </div>
+                        <strong>20 Marks</strong>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="assignment-detail">
+                            <i class="bi bi-upload me-1"></i> Submissions
+                        </div>
+                        <strong>Not Available</strong>
                     </div>
 
                 </div>
@@ -218,6 +426,10 @@
     <div class="alert mt-4 rounded-3"
          style="background:#F7F1E8; color:#806D62; border:none;">
         <i class="bi bi-info-circle me-2"></i>
+        These are sample assignments for frontend demonstration.
+        Assignment creation, submission tracking and file uploads will be
+        connected to the backend later.
+
         Assignment details and submission counts are fetched from the backend.
     </div>
 

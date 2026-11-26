@@ -5,6 +5,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const assignmentItems = document.querySelectorAll(".assignment-item");
     const emptyMessage = document.getElementById("emptyMessage");
 
+    const createButton = document.getElementById("createAssignmentBtn");
+
+
+
     function filterAssignments() {
         const searchText = searchInput.value.toLowerCase().trim();
         const selectedStatus = statusFilter.value;
@@ -35,4 +39,15 @@ document.addEventListener("DOMContentLoaded", function () {
         searchInput.addEventListener("input", filterAssignments);
         statusFilter.addEventListener("change", filterAssignments);
     }
+
+
+    if (createButton) {
+        createButton.addEventListener("click", function () {
+            alert(
+                "The Create Assignment feature will be connected to the backend later."
+            );
+        });
+    }
+
+
 });

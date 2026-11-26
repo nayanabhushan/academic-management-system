@@ -1,5 +1,152 @@
 
 {% extends 'base.html' %}
+{% load static %}
+
+{% block title %}My Sections | Teacher Portal{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/teacher-sections.css' %}">
+{% endblock %}
+
+{% block navbar %}{% endblock %}
+
+{% block content %}
+
+<div class="container page-container">
+
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+        <div>
+            <h1 class="page-title">My Sections</h1>
+            <p class="page-subtitle">
+                View and manage your assigned academic sections.
+            </p>
+        </div>
+
+        <a href="{% url 'teacher_dashboard' %}" class="back-btn">
+            <i class="bi bi-arrow-left"></i> Back to Dashboard
+        </a>
+    </div>
+
+    <!-- SUMMARY CARDS -->
+    <div class="stats-grid">
+
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="bi bi-collection-fill"></i>
+            </div>
+            <h3>--</h3>
+            <p>Total Assigned Sections</p>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="bi bi-people-fill"></i>
+            </div>
+            <h3>--</h3>
+            <p>Total Students</p>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="bi bi-book-fill"></i>
+            </div>
+            <h3>--</h3>
+            <p>Courses Assigned</p>
+        </div>
+
+    </div>
+
+    <!-- SECTION LIST -->
+    <h2 class="section-heading">Assigned Sections</h2>
+
+    <!-- SEARCH AND FILTER -->
+    <div class="filter-bar">
+
+        <input
+            type="text"
+            id="searchSection"
+            placeholder="Search by section or course..."
+        >
+
+        <select id="courseFilter">
+            <option value="all">All Courses</option>
+            <option value="btech">B.Tech</option>
+        </select>
+
+    </div>
+
+    <!-- SECTION CARDS -->
+    <div class="sections-grid" id="sectionsGrid">
+
+        <div class="section-card" data-course="btech">
+            <div class="section-card-top">
+                <div class="section-icon">
+                    <i class="bi bi-people"></i>
+                </div>
+                <span class="section-badge">B.Tech</span>
+            </div>
+
+            <h4>Section A</h4>
+            <p class="course">Bachelor of Technology</p>
+
+            <div class="section-info">
+                <div>
+                    <p class="info-label">Students</p>
+                    <p class="info-value">--</p>
+                </div>
+                <div>
+                    <p class="info-label">Academic Year</p>
+                    <p class="info-value">2026–27</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-card" data-course="btech">
+            <div class="section-card-top">
+                <div class="section-icon">
+                    <i class="bi bi-people"></i>
+                </div>
+                <span class="section-badge">B.Tech</span>
+            </div>
+
+            <h4>Section B</h4>
+            <p class="course">Bachelor of Technology</p>
+
+            <div class="section-info">
+                <div>
+                    <p class="info-label">Students</p>
+                    <p class="info-value">--</p>
+                </div>
+                <div>
+                    <p class="info-label">Academic Year</p>
+                    <p class="info-value">2026–27</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- EMPTY SEARCH MESSAGE -->
+    <div class="empty-message" id="emptyMessage">
+        <i class="bi bi-search fs-3"></i>
+        <p class="mt-2 mb-0">No matching sections found.</p>
+    </div>
+
+    <!-- INFORMATION NOTE -->
+    <div class="page-note">
+        <i class="bi bi-info-circle"></i>
+        Section names and course details shown here are sample data.
+        Actual assigned sections and student counts will be fetched
+        from the database after backend integration.
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/teacher-sections.js' %}"></script>
 
 {% block title %}My Sections | Academic Management System{% endblock %}
 

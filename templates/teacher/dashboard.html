@@ -37,6 +37,7 @@
         margin-bottom: 28px;
     }
 
+    .sidebar a {
     .sidebar a,
     .sidebar .disabled-link {
         display: block;
@@ -55,6 +56,7 @@
         color: white;
     }
 
+    .sidebar a i { margin-right: 10px; }
     .sidebar .disabled-link {
         opacity: 0.55;
         cursor: not-allowed;
@@ -194,6 +196,22 @@
     }
 
     .logout-link {
+        color: #49352E !important;
+        border: 1px solid #C98F91;
+        border-radius: 9px;
+        padding: 9px 15px;
+        text-decoration: none;
+        font-size: 13px;
+        white-space: nowrap;
+    }
+
+    .logout-link:hover {
+        background: #C98F91;
+        color: white !important;
+    }
+
+    /* UPCOMING CLASSES */
+
         color: #49352E;
         border: 1px solid #C98F91;
         border-radius: 9px;
@@ -234,9 +252,15 @@
     }
 
     .view-timetable-link {
+        color: #49352E;
+        text-decoration: none;
         color: #A18B7B;
         font-size: 13px;
         font-weight: 600;
+    }
+
+    .view-timetable-link:hover {
+        color: #C98F91;
     }
 
     .upcoming-empty {
@@ -292,6 +316,7 @@
         .dashboard-wrapper { flex-direction: column; }
         .sidebar { width: 100%; }
 
+        .sidebar a {
         .sidebar a,
         .sidebar .disabled-link {
             display: inline-block;
@@ -306,6 +331,9 @@
         .overview-grid,
         .modules-grid { grid-template-columns: 1fr; }
 
+        .upcoming-section {
+            padding: 16px;
+        }
         .upcoming-section { padding: 16px; }
     }
 </style>
@@ -327,6 +355,18 @@
             <i class="bi bi-grid-fill"></i> Dashboard
         </a>
 
+        <a href="{% url 'teacher_sections' %}">
+            <i class="bi bi-collection"></i> My Sections
+        </a>
+
+        <a href="{% url 'teacher_subjects' %}">
+            <i class="bi bi-book"></i> My Subjects
+        </a>
+
+        <a href="{% url 'teacher_students' %}">
+            <i class="bi bi-people"></i> Student Lists
+        </a>
+
         <span class="disabled-link">
             <i class="bi bi-collection"></i> My Sections
         </span>
@@ -343,6 +383,29 @@
             <i class="bi bi-calendar-check"></i> Attendance
         </a>
 
+        <a href="{% url 'teacher_assignments' %}">
+            <i class="bi bi-journal-text"></i> Assignments
+        </a>
+
+        <a href="{% url 'teacher_marks' %}">
+            <i class="bi bi-bar-chart"></i> Marks & Results
+        </a>
+
+        <a href="{% url 'teacher_timetable' %}">
+            <i class="bi bi-calendar-week"></i> Timetable
+        </a>
+
+        <a href="{% url 'teacher_notices' %}">
+            <i class="bi bi-megaphone"></i> Notice Board
+        </a>
+
+        <a href="{% url 'teacher_documents' %}">
+            <i class="bi bi-folder"></i> Documents
+        </a>
+
+        <a href="{% url 'teacher_profile' %}">
+            <i class="bi bi-person-circle"></i> My Profile
+        </a>
         <span class="disabled-link">
             <i class="bi bi-journal-text"></i> Assignments
         </span>
@@ -389,6 +452,10 @@
                     Teacher Portal
                 </span>
 
+                <a href="{% url 'teacher_login' %}" class="logout-link">
+                    <i class="bi bi-box-arrow-right"></i>
+                    Logout
+                </a>
                 <span class="logout-link" title="Logout functionality not configured yet">
                     <i class="bi bi-box-arrow-right"></i>
                     Logout
@@ -446,6 +513,10 @@
                     <p>Your upcoming classes based on your assigned timetable.</p>
                 </div>
 
+                <a href="{% url 'teacher_timetable' %}" class="view-timetable-link">
+                    View Full Timetable
+                    <i class="bi bi-arrow-right"></i>
+                </a>
                 <span class="view-timetable-link">
                     View Full Timetable
                     <i class="bi bi-arrow-right"></i>
@@ -467,6 +538,8 @@
                     </thead>
 
                     <tbody>
+                        <!-- Backend will populate this teacher's upcoming classes -->
+
                         <tr>
                             <td colspan="5">
                                 <div class="upcoming-empty">
@@ -476,6 +549,8 @@
                                 </div>
                             </td>
                         </tr>
+
+
                     </tbody>
 
                 </table>
@@ -489,6 +564,23 @@
 
         <div class="modules-grid">
 
+            <a href="{% url 'teacher_sections' %}" class="module-card">
+                <div class="module-icon"><i class="bi bi-collection"></i></div>
+                <h5>My Sections</h5>
+                <p>View and manage your assigned sections.</p>
+            </a>
+
+            <a href="{% url 'teacher_subjects' %}" class="module-card">
+                <div class="module-icon"><i class="bi bi-book"></i></div>
+                <h5>My Subjects</h5>
+                <p>View subjects assigned to you.</p>
+            </a>
+
+            <a href="{% url 'teacher_students' %}" class="module-card">
+                <div class="module-icon"><i class="bi bi-people"></i></div>
+                <h5>Student Lists</h5>
+                <p>View student details and section-wise lists.</p>
+            </a>
             <div class="module-card module-card-disabled">
                 <div class="module-icon"><i class="bi bi-collection"></i></div>
                 <h5>My Sections</h5>
@@ -513,6 +605,41 @@
                 <p>Mark and manage student attendance.</p>
             </a>
 
+            <a href="{% url 'teacher_assignments' %}" class="module-card">
+                <div class="module-icon"><i class="bi bi-journal-text"></i></div>
+                <h5>Assignments</h5>
+                <p>Create and manage student assignments.</p>
+            </a>
+
+            <a href="{% url 'teacher_marks' %}" class="module-card">
+                <div class="module-icon"><i class="bi bi-bar-chart"></i></div>
+                <h5>Marks & Results</h5>
+                <p>Upload marks and review student performance.</p>
+            </a>
+
+            <a href="{% url 'teacher_timetable' %}" class="module-card">
+                <div class="module-icon"><i class="bi bi-calendar-week"></i></div>
+                <h5>Timetable</h5>
+                <p>View your personal weekly teaching schedule and assigned classes.</p>
+            </a>
+
+            <a href="{% url 'teacher_notices' %}" class="module-card">
+                <div class="module-icon"><i class="bi bi-megaphone"></i></div>
+                <h5>Notice Board</h5>
+                <p>Create and share important academic notices.</p>
+            </a>
+
+            <a href="{% url 'teacher_documents' %}" class="module-card">
+                <div class="module-icon"><i class="bi bi-folder"></i></div>
+                <h5>Documents</h5>
+                <p>Manage academic documents and study resources.</p>
+            </a>
+
+            <a href="{% url 'teacher_profile' %}" class="module-card">
+                <div class="module-icon"><i class="bi bi-person-circle"></i></div>
+                <h5>My Profile</h5>
+                <p>View and manage your teacher profile.</p>
+            </a>
             <div class="module-card module-card-disabled">
                 <div class="module-icon"><i class="bi bi-journal-text"></i></div>
                 <h5>Assignments</h5>

@@ -12,6 +12,7 @@
 
 <div class="container marks-page">
 
+    <!-- Page Header -->
     <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
         <div>
             <h2 class="page-heading">My Marks & Results</h2>
@@ -25,11 +26,13 @@
         </a>
     </div>
 
+    <!-- Performance Summary -->
     <div class="row g-3">
 
         <div class="col-md-3 col-sm-6">
             <div class="summary-card">
                 <h6>Overall Percentage</h6>
+                <h3>--%</h3>
                 <h3>{{ overall_percentage }}%</h3>
             </div>
         </div>
@@ -44,6 +47,7 @@
         <div class="col-md-3 col-sm-6">
             <div class="summary-card">
                 <h6>Subjects</h6>
+                <h3>--</h3>
                 <h3>{{ subject_count }}</h3>
             </div>
         </div>
@@ -51,12 +55,14 @@
         <div class="col-md-3 col-sm-6">
             <div class="summary-card">
                 <h6>Result Status</h6>
-                <h3>{% if marks_records %}Available{% else %}Pending{% endif %}</h3>
+                <h3>--</h3>
+              <h3>{% if marks_records %}Available{% else %}Pending{% endif %}</h3>
             </div>
         </div>
 
     </div>
 
+    <!-- Subject-wise Marks -->
     <div class="content-card">
 
         <h5 class="section-title">
@@ -71,6 +77,10 @@
                 <thead>
                     <tr>
                         <th>Subject</th>
+                        <th>Internal Marks</th>
+                        <th>External Marks</th>
+                        <th>Total</th>
+                        <th>Grade</th>
                         <th>Assessment</th>
                         <th>Marks Obtained</th>
                         <th>Maximum Marks</th>
@@ -80,6 +90,61 @@
                 </thead>
 
                 <tbody>
+
+                    <tr>
+                        <td>Applied Mathematics</td>
+                        <td>--</td>
+                        <td>--</td>
+                        <td>--</td>
+                        <td>--</td>
+                        <td><span class="result-badge">Pending</span></td>
+                    </tr>
+
+                    <tr>
+                        <td>Applied Physics</td>
+                        <td>--</td>
+                        <td>--</td>
+                        <td>--</td>
+                        <td>--</td>
+                        <td><span class="result-badge">Pending</span></td>
+                    </tr>
+
+                    <tr>
+                        <td>Applied Chemistry</td>
+                        <td>--</td>
+                        <td>--</td>
+                        <td>--</td>
+                        <td>--</td>
+                        <td><span class="result-badge">Pending</span></td>
+                    </tr>
+
+                    <tr>
+                        <td>Electrical Science</td>
+                        <td>--</td>
+                        <td>--</td>
+                        <td>--</td>
+                        <td>--</td>
+                        <td><span class="result-badge">Pending</span></td>
+                    </tr>
+
+                    <tr>
+                        <td>Manufacturing Process</td>
+                        <td>--</td>
+                        <td>--</td>
+                        <td>--</td>
+                        <td>--</td>
+                        <td><span class="result-badge">Pending</span></td>
+                    </tr>
+
+                    <tr>
+                        <td>Communication Skills</td>
+                        <td>--</td>
+                        <td>--</td>
+                        <td>--</td>
+                        <td>--</td>
+                        <td><span class="result-badge">Pending</span></td>
+                    </tr>
+
                     {% for record in marks_records %}
                     <tr>
                         <td>{{ record.teaching_assignment.subject.name }}</td>
@@ -108,6 +173,7 @@
 
     </div>
 
+    <!-- Examination History -->
     <div class="content-card">
 
         <h5 class="section-title">
@@ -129,6 +195,28 @@
                 </thead>
 
                 <tbody>
+
+                    <tr>
+                        <td>Internal Assessment 1</td>
+                        <td>2026–27</td>
+                        <td>--</td>
+                        <td>--</td>
+                    </tr>
+
+                    <tr>
+                        <td>Internal Assessment 2</td>
+                        <td>2026–27</td>
+                        <td>--</td>
+                        <td>--</td>
+                    </tr>
+
+                    <tr>
+                        <td>End Semester Examination</td>
+                        <td>2026–27</td>
+                        <td>--</td>
+                        <td>--</td>
+                    </tr>
+
                     {% for record in marks_records %}
                     <tr>
                         <td>{{ record.assessment_name }}</td>
@@ -153,6 +241,9 @@
 
         <div class="notice">
             <i class="bi bi-info-circle me-2"></i>
+            This page currently displays placeholder information.
+            Actual marks, grades, CGPA and examination results will be
+            retrieved from the backend.
             Overall percentage is calculated from your recorded marks.
             CGPA will be available when the academic grading system is implemented.
         </div>
