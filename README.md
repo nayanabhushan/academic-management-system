@@ -78,6 +78,7 @@ academic-management-system/
 ├── requirements.txt
 └── README.md
 
+
 Note: The directory structure above is a simplified overview. Refer to the repository for the complete structure.
 
 🚀 Getting Started
