@@ -57,26 +57,22 @@ Git & GitHub| Version Control and Collaboration
 
 📂 Project Structure
 
-academic-management-system/
-│
 ├── accounts/
 ├── academics/
 ├── student/
 ├── teacher/
-│
 ├── static/
 │   ├── css/
 │   ├── js/
 │   └── images/
-│
 ├── templates/
 │   ├── accounts/
 │   ├── student/
 │   └── teacher/
-│
 ├── manage.py
 ├── requirements.txt
 └── README.md
+
 
 
 Note: The directory structure above is a simplified overview. Refer to the repository for the complete structure.
