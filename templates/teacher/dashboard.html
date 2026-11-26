@@ -38,6 +38,8 @@
     }
 
     .sidebar a {
+    .sidebar a,
+    .sidebar .disabled-link {
         display: block;
         text-decoration: none;
         color: #49352E;
@@ -55,6 +57,15 @@
     }
 
     .sidebar a i { margin-right: 10px; }
+    .sidebar .disabled-link {
+        opacity: 0.55;
+        cursor: not-allowed;
+    }
+
+    .sidebar a i,
+    .sidebar .disabled-link i {
+        margin-right: 10px;
+    }
 
     .main-content {
         flex: 1;
@@ -154,6 +165,17 @@
         box-shadow: 0 6px 18px rgba(73, 53, 46, 0.08);
     }
 
+    .module-card-disabled {
+        cursor: not-allowed;
+        opacity: 0.65;
+    }
+
+    .module-card-disabled:hover {
+        transform: none;
+        border-color: #EADDD5;
+        box-shadow: none;
+    }
+
     .module-icon {
         color: #C98F91;
         font-size: 27px;
@@ -190,6 +212,15 @@
 
     /* UPCOMING CLASSES */
 
+        color: #49352E;
+        border: 1px solid #C98F91;
+        border-radius: 9px;
+        padding: 9px 15px;
+        font-size: 13px;
+        white-space: nowrap;
+        opacity: 0.6;
+    }
+
     .upcoming-section {
         background: #FFFAF5;
         border: 1px solid #EADDD5;
@@ -223,6 +254,7 @@
     .view-timetable-link {
         color: #49352E;
         text-decoration: none;
+        color: #A18B7B;
         font-size: 13px;
         font-weight: 600;
     }
@@ -285,6 +317,8 @@
         .sidebar { width: 100%; }
 
         .sidebar a {
+        .sidebar a,
+        .sidebar .disabled-link {
             display: inline-block;
             margin-right: 4px;
         }
@@ -300,6 +334,7 @@
         .upcoming-section {
             padding: 16px;
         }
+        .upcoming-section { padding: 16px; }
     }
 </style>
 {% endblock %}
@@ -332,6 +367,18 @@
             <i class="bi bi-people"></i> Student Lists
         </a>
 
+        <span class="disabled-link">
+            <i class="bi bi-collection"></i> My Sections
+        </span>
+
+        <span class="disabled-link">
+            <i class="bi bi-book"></i> My Subjects
+        </span>
+
+        <span class="disabled-link">
+            <i class="bi bi-people"></i> Student Lists
+        </span>
+
         <a href="{% url 'teacher_attendance' %}">
             <i class="bi bi-calendar-check"></i> Attendance
         </a>
@@ -359,6 +406,29 @@
         <a href="{% url 'teacher_profile' %}">
             <i class="bi bi-person-circle"></i> My Profile
         </a>
+        <span class="disabled-link">
+            <i class="bi bi-journal-text"></i> Assignments
+        </span>
+
+        <span class="disabled-link">
+            <i class="bi bi-bar-chart"></i> Marks & Results
+        </span>
+
+        <span class="disabled-link">
+            <i class="bi bi-calendar-week"></i> Timetable
+        </span>
+
+        <span class="disabled-link">
+            <i class="bi bi-megaphone"></i> Notice Board
+        </span>
+
+        <span class="disabled-link">
+            <i class="bi bi-folder"></i> Documents
+        </span>
+
+        <span class="disabled-link">
+            <i class="bi bi-person-circle"></i> My Profile
+        </span>
 
     </aside>
 
@@ -386,6 +456,10 @@
                     <i class="bi bi-box-arrow-right"></i>
                     Logout
                 </a>
+                <span class="logout-link" title="Logout functionality not configured yet">
+                    <i class="bi bi-box-arrow-right"></i>
+                    Logout
+                </span>
 
             </div>
         </div>
@@ -443,6 +517,10 @@
                     View Full Timetable
                     <i class="bi bi-arrow-right"></i>
                 </a>
+                <span class="view-timetable-link">
+                    View Full Timetable
+                    <i class="bi bi-arrow-right"></i>
+                </span>
             </div>
 
             <div class="table-responsive">
@@ -471,6 +549,7 @@
                                 </div>
                             </td>
                         </tr>
+
 
                     </tbody>
 
@@ -502,6 +581,23 @@
                 <h5>Student Lists</h5>
                 <p>View student details and section-wise lists.</p>
             </a>
+            <div class="module-card module-card-disabled">
+                <div class="module-icon"><i class="bi bi-collection"></i></div>
+                <h5>My Sections</h5>
+                <p>View and manage your assigned sections.</p>
+            </div>
+
+            <div class="module-card module-card-disabled">
+                <div class="module-icon"><i class="bi bi-book"></i></div>
+                <h5>My Subjects</h5>
+                <p>View subjects assigned to you.</p>
+            </div>
+
+            <div class="module-card module-card-disabled">
+                <div class="module-icon"><i class="bi bi-people"></i></div>
+                <h5>Student Lists</h5>
+                <p>View student details and section-wise lists.</p>
+            </div>
 
             <a href="{% url 'teacher_attendance' %}" class="module-card">
                 <div class="module-icon"><i class="bi bi-calendar-check"></i></div>
@@ -544,6 +640,41 @@
                 <h5>My Profile</h5>
                 <p>View and manage your teacher profile.</p>
             </a>
+            <div class="module-card module-card-disabled">
+                <div class="module-icon"><i class="bi bi-journal-text"></i></div>
+                <h5>Assignments</h5>
+                <p>Create and manage student assignments.</p>
+            </div>
+
+            <div class="module-card module-card-disabled">
+                <div class="module-icon"><i class="bi bi-bar-chart"></i></div>
+                <h5>Marks & Results</h5>
+                <p>Upload marks and review student performance.</p>
+            </div>
+
+            <div class="module-card module-card-disabled">
+                <div class="module-icon"><i class="bi bi-calendar-week"></i></div>
+                <h5>Timetable</h5>
+                <p>View your personal weekly teaching schedule and assigned classes.</p>
+            </div>
+
+            <div class="module-card module-card-disabled">
+                <div class="module-icon"><i class="bi bi-megaphone"></i></div>
+                <h5>Notice Board</h5>
+                <p>Create and share important academic notices.</p>
+            </div>
+
+            <div class="module-card module-card-disabled">
+                <div class="module-icon"><i class="bi bi-folder"></i></div>
+                <h5>Documents</h5>
+                <p>Manage academic documents and study resources.</p>
+            </div>
+
+            <div class="module-card module-card-disabled">
+                <div class="module-icon"><i class="bi bi-person-circle"></i></div>
+                <h5>My Profile</h5>
+                <p>View and manage your teacher profile.</p>
+            </div>
 
         </div>
 

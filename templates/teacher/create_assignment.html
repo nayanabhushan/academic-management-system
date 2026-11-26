@@ -1,0 +1,159 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Create Assignment | Teacher Portal{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/teacher-assignments.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid py-4">
+
+    <div class="mb-4">
+        <h2 class="page-heading">Create Assignment</h2>
+        <p class="page-subtitle mb-0">
+            Create an assignment for your assigned subject and section.
+        </p>
+    </div>
+
+    <div class="card border-0 shadow-sm rounded-4 p-4">
+
+        {% if error_message %}
+        <div class="alert alert-danger rounded-3">
+            {{ error_message }}
+        </div>
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label for="teaching_assignment" class="form-label">
+                    Subject and Section
+                </label>
+
+                <select
+                    name="teaching_assignment"
+                    id="teaching_assignment"
+                    class="form-select custom-input"
+                    required
+                >
+                    <option value="">Select subject and section</option>
+
+                    {% for item in teaching_assignments %}
+                    <option value="{{ item.id }}">
+                        {{ item.subject.name }} -
+                        {{ item.section.course }}
+                        Section {{ item.section.section }}
+                        (Semester {{ item.section.semester }})
+                    </option>
+                    {% endfor %}
+
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="title" class="form-label">
+                    Assignment Title
+                </label>
+
+                <input
+                    type="text"
+                    name="title"
+                    id="title"
+                    class="form-control custom-input"
+                    maxlength="200"
+                    placeholder="Enter assignment title"
+                    required
+                >
+            </div>
+
+            <div class="mb-3">
+                <label for="description" class="form-label">
+                    Description
+                </label>
+
+                <textarea
+                    name="description"
+                    id="description"
+                    class="form-control custom-input"
+                    rows="4"
+                    placeholder="Enter assignment instructions..."
+                ></textarea>
+            </div>
+
+            <div class="row g-3">
+
+                <div class="col-md-6">
+                    <label for="due_date" class="form-label">
+                        Due Date and Time
+                    </label>
+
+                    <input
+                        type="datetime-local"
+                        name="due_date"
+                        id="due_date"
+                        class="form-control custom-input"
+                    >
+                </div>
+
+                <div class="col-md-6">
+                    <label for="total_marks" class="form-label">
+                        Total Marks
+                    </label>
+
+                    <input
+                        type="number"
+                        name="total_marks"
+                        id="total_marks"
+                        class="form-control custom-input"
+                        min="1"
+                        placeholder="Enter total marks"
+                        required
+                    >
+                </div>
+
+            </div>
+
+            <div class="mt-3 mb-4">
+                <label for="status" class="form-label">
+                    Assignment Status
+                </label>
+
+                <select
+                    name="status"
+                    id="status"
+                    class="form-select custom-input"
+                    required
+                >
+                    <option value="DRAFT">Draft</option>
+                    <option value="ACTIVE">Active</option>
+                </select>
+            </div>
+
+            <div class="d-flex flex-wrap gap-2">
+
+                <button type="submit" class="btn btn-create">
+                    <i class="bi bi-check-circle me-2"></i>
+                    Save Assignment
+                </button>
+
+                <a
+                    href="{% url 'teacher_assignments' %}"
+                    class="btn btn-outline-secondary rounded-3"
+                >
+                    Cancel
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

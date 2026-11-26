@@ -23,6 +23,7 @@
         </div>
 
         <a href="/student/dashboard/" class="back-btn">
+        <a href="{% url 'student_dashboard' %}" class="back-btn">
             <i class="bi bi-arrow-left"></i> Dashboard
         </a>
     </div>
@@ -34,6 +35,7 @@
             <div class="summary-card">
                 <i class="bi bi-percent"></i>
                 <h3>--%</h3>
+                <h3>{{ overall_percentage }}%</h3>
                 <p>Overall Attendance</p>
             </div>
         </div>
@@ -42,6 +44,7 @@
             <div class="summary-card">
                 <i class="bi bi-calendar2-check"></i>
                 <h3>--</h3>
+                <h3>{{ total_classes }}</h3>
                 <p>Total Classes Conducted</p>
             </div>
         </div>
@@ -50,6 +53,7 @@
             <div class="summary-card">
                 <i class="bi bi-person-check"></i>
                 <h3>--</h3>
+                <h3>{{ classes_attended }}</h3>
                 <p>Classes Attended</p>
             </div>
         </div>
@@ -58,6 +62,7 @@
             <div class="summary-card">
                 <i class="bi bi-person-x"></i>
                 <h3>--</h3>
+                <h3>{{ classes_missed }}</h3>
                 <p>Classes Missed</p>
             </div>
         </div>
@@ -128,6 +133,31 @@
                 <div class="progress-bar" style="width: 0%"></div>
             </div>
         </div>
+        {% for subject in subject_attendance %}
+        <div class="mb-4">
+
+            <div class="d-flex justify-content-between mb-2">
+                <span class="subject-name">{{ subject.name }}</span>
+                <span class="attendance-value">{{ subject.percentage }}%</span>
+            </div>
+
+            <div class="progress">
+                <div
+                    class="progress-bar"
+                    role="progressbar"
+                    style="width: {{ subject.percentage }}%;"
+                    aria-valuenow="{{ subject.percentage }}"
+                    aria-valuemin="0"
+                    aria-valuemax="100">
+                </div>
+            </div>
+
+            <small>{{ subject.attended }} out of {{ subject.total }} classes attended</small>
+
+        </div>
+        {% empty %}
+        <p>No subjects have been assigned to your section yet.</p>
+        {% endfor %}
 
     </div>
 
@@ -178,6 +208,32 @@
                         <td>Lecture</td>
                         <td><span class="status-present">Present</span></td>
                     </tr>
+                    {% for record in recent_attendance %}
+                    <tr>
+                        <td>{{ record.date|date:"d-m-Y" }}</td>
+
+                        <td>{{ record.teaching_assignment.subject.name }}</td>
+
+                        <td>{{ record.get_class_type_display }}</td>
+
+                        <td>
+                            {% if record.status == "PRESENT" %}
+                                <span class="status-present">Present</span>
+                            {% elif record.status == "ABSENT" %}
+                                <span class="status-absent">Absent</span>
+                            {% elif record.status == "LATE" %}
+                                <span class="status-late">Late</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+
+                    {% empty %}
+                    <tr>
+                        <td colspan="4" class="text-center">
+                            No attendance records available yet.
+                        </td>
+                    </tr>
+                    {% endfor %}
 
                 </tbody>
 
@@ -188,6 +244,8 @@
         <p class="note">
             Note: These are sample display records. Actual attendance
             information will be fetched from the backend.
+=======
+            Attendance information is fetched directly from the database.
         </p>
 
     </div>

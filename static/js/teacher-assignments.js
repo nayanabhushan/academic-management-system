@@ -4,7 +4,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const statusFilter = document.getElementById("statusFilter");
     const assignmentItems = document.querySelectorAll(".assignment-item");
     const emptyMessage = document.getElementById("emptyMessage");
+
     const createButton = document.getElementById("createAssignmentBtn");
+
+
 
     function filterAssignments() {
         const searchText = searchInput.value.toLowerCase().trim();
@@ -37,6 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
         statusFilter.addEventListener("change", filterAssignments);
     }
 
+
     if (createButton) {
         createButton.addEventListener("click", function () {
             alert(
@@ -44,4 +48,6 @@ document.addEventListener("DOMContentLoaded", function () {
             );
         });
     }
+
+
 });

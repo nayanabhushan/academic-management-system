@@ -181,6 +181,10 @@
 
             <div>
                 <h1 class="welcome-title">Welcome, Student!</h1>
+                <h1 class="welcome-title">
+                    Welcome, {{ student.name }}!
+                </h1>
+
                 <p class="welcome-subtitle">
                     Here's an overview of your academic activities.
                 </p>
@@ -212,6 +216,7 @@
                     <i class="bi bi-calendar-check"></i>
                 </div>
                 <h3>--</h3>
+                <h3>{{ attendance_percentage }}%</h3>
                 <p>Attendance</p>
             </div>
 
@@ -228,6 +233,7 @@
                     <i class="bi bi-journal-text"></i>
                 </div>
                 <h3>--</h3>
+                <h3>{{ pending_assignments }}</h3>
                 <p>Pending Assignments</p>
             </div>
 

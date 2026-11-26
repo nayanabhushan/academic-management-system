@@ -63,6 +63,7 @@
 
     .form-panel {
         padding: 55px 45px;
+        padding: 45px;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -77,6 +78,7 @@
     .subtitle {
         color: #A18B7B;
         margin-bottom: 32px;
+        margin-bottom: 25px;
         font-size: 14px;
     }
 
@@ -113,11 +115,42 @@
         color: white;
     }
 
+    .register-section {
+        margin-top: 22px;
+        text-align: center;
+    }
+
+    .register-heading {
+        color: #78665B;
+        font-size: 13px;
+        margin-bottom: 12px;
+    }
+
+    .register-btn {
+        display: inline-block;
+        padding: 10px 14px;
+        margin: 5px;
+        border: 1px solid #C98F91;
+        border-radius: 10px;
+        color: #49352E;
+        text-decoration: none;
+        font-size: 13px;
+        font-weight: 600;
+        transition: 0.3s;
+    }
+
+    .register-btn:hover {
+        background: #C98F91;
+        color: white;
+    }
+
     .footer-text {
         color: #A18B7B;
         font-size: 12px;
         text-align: center;
         margin-top: 28px;
+
+        margin-top: 22px;
     }
 
     @media (max-width: 768px) {
@@ -135,6 +168,13 @@
 
         .form-panel {
             padding: 40px 30px;
+        }
+    }
+
+
+    @media (max-width: 380px) {
+        .register-btn {
+            display: block;
         }
     }
 </style>
@@ -174,6 +214,10 @@
                         name="username"
                         class="form-control"
                         placeholder="Enter your username"
+
+
+                        required
+
                     >
                 </div>
 
@@ -185,6 +229,10 @@
                         name="password"
                         class="form-control"
                         placeholder="Enter your password"
+
+
+                        required
+
                     >
                 </div>
 
@@ -193,6 +241,25 @@
                 </button>
 
             </form>
+
+
+
+            <div class="register-section">
+
+                <p class="register-heading">
+                    New to CampusConnect? Create an account
+                </p>
+
+                <a href="/accounts/register/student/" class="register-btn">
+                    Register as Student
+                </a>
+
+                <a href="/accounts/register/teacher/" class="register-btn">
+                    Register as Teacher
+                </a>
+
+            </div>
+
 
             <p class="footer-text">
                 Academic Management System
@@ -204,4 +271,8 @@
 
 </div>
 
+
 {% endblock %}
+
+{% endblock %}
+

@@ -1,0 +1,222 @@
+
+{% extends 'base.html' %}
+
+{% block title %}Mark Attendance | Academic Management System{% endblock %}
+
+{% block extra_css %}
+<style>
+    body {
+        background: #F7F1E8;
+    }
+
+    .attendance-wrapper {
+        max-width: 900px;
+        margin: 40px auto;
+        padding: 30px;
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 4px 18px rgba(0,0,0,0.06);
+    }
+
+    h2 { color: #493B35; margin-bottom: 10px; }
+    .subtitle { color: #81736C; margin-bottom: 25px; }
+    .form-group { margin-bottom: 22px; }
+
+    label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 8px;
+        color: #493B35;
+    }
+
+    select, input:not([type="radio"]) {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #DED4CA;
+        border-radius: 8px;
+        background: #FFFCF8;
+        font-size: 15px;
+    }
+
+    .submit-btn {
+        background: #735A50;
+        color: white;
+        padding: 12px 22px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 15px;
+    }
+
+    .submit-btn:hover { background: #59443C; }
+
+    .student-row {
+        padding: 16px;
+        border-bottom: 1px solid #eee;
+        color: #493B35;
+    }
+
+    .student-count {
+        color: #81736C;
+        margin-bottom: 12px;
+    }
+
+    .status-option {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        margin: 8px 18px 0 0;
+        font-weight: normal;
+    }
+
+    .status-option input {
+        width: auto;
+    }
+
+    .error-message {
+        color: #B42318;
+        margin: 15px 0;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="attendance-wrapper">
+
+    <h2>Mark Attendance</h2>
+    <p class="subtitle">
+        Select your assigned subject and class details to begin.
+    </p>
+
+    {% if error_message %}
+        <p class="error-message">{{ error_message }}</p>
+    {% endif %}
+
+    {% if assignments %}
+
+        <form method="GET">
+
+            <div class="form-group">
+                <label for="assignment">Subject and Section</label>
+
+                <select name="assignment" id="assignment" required>
+                    <option value="">Select an assignment</option>
+
+                    {% for assignment in assignments %}
+                        <option value="{{ assignment.id }}"
+                            {% if selected_assignment and selected_assignment.id == assignment.id %}selected{% endif %}>
+                            {{ assignment.subject.name }} —
+                            {{ assignment.section.course }}
+                            ({{ assignment.section.section }})
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="date">Class Date</label>
+                <input type="date" name="date" id="date"
+                       value="{{ selected_date }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="class_type">Class Type</label>
+
+                <select name="class_type" id="class_type" required>
+                    <option value="LECTURE" {% if selected_class_type == "LECTURE" %}selected{% endif %}>
+                        Lecture
+                    </option>
+
+                    <option value="PRACTICAL" {% if selected_class_type == "PRACTICAL" %}selected{% endif %}>
+                        Practical
+                    </option>
+                </select>
+            </div>
+
+            <button type="submit" class="submit-btn">
+                Load Students
+            </button>
+
+        </form>
+
+        {% if selected_assignment %}
+
+            <hr style="margin: 30px 0;">
+
+            <h3>Students in {{ selected_assignment.section }}</h3>
+
+            {% if students %}
+
+                <p class="student-count">
+                    Total Students: {{ students|length }}
+                </p>
+
+                <form method="POST">
+                    {% csrf_token %}
+
+                    <input type="hidden" name="assignment"
+                           value="{{ selected_assignment.id }}">
+
+                    <input type="hidden" name="date"
+                           value="{{ selected_date }}">
+
+                    <input type="hidden" name="class_type"
+                           value="{{ selected_class_type }}">
+
+                    {% for student in students %}
+
+                        <div class="student-row">
+
+                            <div style="margin-bottom: 12px;">
+                                <strong>{{ student.name }}</strong>
+                                <span>({{ student.enrollment_no }})</span>
+                            </div>
+
+                            <label class="status-option">
+                                <input type="radio"
+                                       name="status_{{ student.id }}"
+                                       value="PRESENT"
+                                       {% if student.previous_status == "PRESENT" %}checked{% endif %}
+                                       required>
+                                Present
+                            </label>
+
+                            <label class="status-option">
+                                <input type="radio"
+                                       name="status_{{ student.id }}"
+                                       value="ABSENT"
+                                       {% if student.previous_status == "ABSENT" %}checked{% endif %}>
+                                Absent
+                            </label>
+
+                            <label class="status-option">
+                                <input type="radio"
+                                       name="status_{{ student.id }}"
+                                       value="LATE"
+                                       {% if student.previous_status == "LATE" %}checked{% endif %}>
+                                Late
+                            </label>
+
+                        </div>
+
+                    {% endfor %}
+
+                    <button type="submit" class="submit-btn"
+                            style="margin-top: 22px;">
+                        Save Attendance
+                    </button>
+
+                </form>
+
+            {% else %}
+                <p>No students are enrolled in this section yet.</p>
+            {% endif %}
+
+        {% endif %}
+
+    {% else %}
+        <p>You don't have any teaching assignments yet.</p>
+    {% endif %}
+
+</div>
+{% endblock %}

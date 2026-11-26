@@ -1,0 +1,24 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Academic Portal Login</title>
+</head>
+<body>
+    <h2>Academic Portal Login</h2>
+
+    {% if form.errors %}
+        <p style="color: red;">
+            Login failed. Please check your username and password.
+        </p>
+        {{ form.errors }}
+    {% endif %}
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button type="submit">Login</button>
+    </form>
+</body>
+</html>

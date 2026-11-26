@@ -29,6 +29,8 @@
         </div>
         <div>
             <h3 class="profile-name">Student Name</h3>
+
+            <h3 class="profile-name">{{ student.name }}</h3>
             <p class="profile-role">Student</p>
             <span class="status-badge">
                 <i class="bi bi-check-circle-fill"></i> Active Student
@@ -45,11 +47,14 @@
             <div>
                 <p class="detail-label">Full Name</p>
                 <p class="detail-value">Student Name</p>
+
+                <p class="detail-value">{{ student.name }}</p>
             </div>
 
             <div>
                 <p class="detail-label">Email Address</p>
                 <p class="detail-value">student@example.com</p>
+                <p class="detail-value">{{ student.college_email }}</p>
             </div>
 
             <div>
@@ -73,11 +78,13 @@
             <div>
                 <p class="detail-label">Student ID</p>
                 <p class="detail-value">Not Assigned</p>
+                <p class="detail-value">{{ student.enrollment_no }}</p>
             </div>
 
             <div>
                 <p class="detail-label">Course</p>
                 <p class="detail-value">Not Provided</p>
+                <p class="detail-value">{{ section.course }}</p>
             </div>
 
             <div>
@@ -88,16 +95,19 @@
             <div>
                 <p class="detail-label">Current Semester</p>
                 <p class="detail-value">Not Provided</p>
+                <p class="detail-value">{{ section.semester }}</p>
             </div>
 
             <div>
                 <p class="detail-label">Academic Year</p>
                 <p class="detail-value">Not Provided</p>
+                <p class="detail-value">{{ section.academic_year }}</p>
             </div>
 
             <div>
                 <p class="detail-label">Section</p>
                 <p class="detail-value">Not Assigned</p>
+                <p class="detail-value">{{ section.section }}</p>
             </div>
         </div>
     </div>

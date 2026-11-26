@@ -147,4 +147,152 @@
 
 {% block extra_js %}
 <script src="{% static 'js/teacher-sections.js' %}"></script>
+
+{% block title %}My Sections | Academic Management System{% endblock %}
+
+{% block extra_css %}
+<style>
+    body {
+        background: #F7F1E8;
+    }
+
+    .sections-container {
+        max-width: 1100px;
+        margin: 35px auto;
+        padding: 20px;
+    }
+
+    .page-header {
+        margin-bottom: 28px;
+    }
+
+    .page-header h1 {
+        color: #493D35;
+        font-size: 30px;
+        margin-bottom: 8px;
+    }
+
+    .page-header p {
+        color: #88796E;
+    }
+
+    .summary-card {
+        background: #FFFFFF;
+        border-radius: 16px;
+        padding: 24px;
+        margin-bottom: 25px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+    }
+
+    .summary-card h3 {
+        color: #9B806C;
+        font-size: 14px;
+        margin-bottom: 10px;
+    }
+
+    .summary-card h2 {
+        color: #493D35;
+        font-size: 30px;
+    }
+
+    .section-card {
+        background: #FFFFFF;
+        border-radius: 16px;
+        padding: 25px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+    }
+
+    .section-card h2 {
+        color: #493D35;
+        margin-bottom: 12px;
+    }
+
+    .section-details {
+        color: #88796E;
+        margin-bottom: 18px;
+        line-height: 1.8;
+    }
+
+    .subject-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .subject-tag {
+        background: #F3E9DD;
+        color: #725B49;
+        padding: 8px 14px;
+        border-radius: 20px;
+        font-size: 13px;
+    }
+
+    .empty-state {
+        background: #FFFFFF;
+        padding: 45px 20px;
+        text-align: center;
+        border-radius: 16px;
+        color: #88796E;
+    }
+
+    .back-link {
+        display: inline-block;
+        margin-top: 20px;
+        color: #80664F;
+        text-decoration: none;
+        font-weight: 600;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="sections-container">
+
+    <div class="page-header">
+        <h1>My Sections</h1>
+        <p>View the academic sections and subjects assigned to you.</p>
+    </div>
+
+    <div class="summary-card">
+        <h3>Total Assigned Sections</h3>
+        <h2>{{ total_sections }}</h2>
+        <p style="color:#88796E; margin-top:8px;">
+            Total students across your assigned sections: {{ total_students }}
+        </p>
+    </div>
+
+    {% for item in sections %}
+        <div class="section-card">
+            <h2>{{ item.section.course }} — Section {{ item.section.section }}</h2>
+
+            <div class="section-details">
+                <strong>Semester:</strong> {{ item.section.semester }}<br>
+                <strong>Academic Year:</strong> {{ item.section.academic_year }}<br>
+                <strong>Students:</strong> {{ item.student_count }}
+            </div>
+
+            <h4 style="color:#725B49; margin-bottom:12px;">
+                Assigned Subjects
+            </h4>
+
+            <div class="subject-list">
+                {% for subject in item.subjects %}
+                    <span class="subject-tag">{{ subject }}</span>
+                {% endfor %}
+            </div>
+        </div>
+
+    {% empty %}
+        <div class="empty-state">
+            <h3>No Sections Assigned Yet</h3>
+            <p>Sections assigned to you will appear here.</p>
+        </div>
+    {% endfor %}
+
+    <a href="{% url 'teacher_dashboard' %}" class="back-link">
+        ← Back to Dashboard
+    </a>
+
+</div>
 {% endblock %}
